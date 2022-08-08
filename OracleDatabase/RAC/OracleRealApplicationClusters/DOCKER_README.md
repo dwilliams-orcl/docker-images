@@ -1,15 +1,15 @@
-# Running an Oracle Real Application Clusters Database using Docker Engine
+# Running an Oracle Real Application Clusters Database Using Docker Engine
 
-This project offers sample container files for Oracle Grid Infrastructure(GI) and Oracle Real Application Clusters(RAC):
+This project offers sample container files for Oracle Grid Infrastructure (GI) and Oracle Real Application Clusters (Oracle RAC):
 
 * Oracle Database 21c Oracle Grid Infrastructure (21.3) for Linux x86-64
 * Oracle Database 21c (21.3) for Linux x86-64
 
-IMPORTANT: To access the Oracle RAC DB on your network either use the Docker MACVLAN driver or use Oracle Connection Manager. To Run Oracle RAC containers on Multi-Host, you must use the Docker MACVLAN driver and your network must be reachable on all the nodes for Oracle RAC containers.
+IMPORTANT: To access the Oracle RAC database on your network, either use the Docker MACVLAN driver, or use Oracle Connection Manager. To Run Oracle RAC containers on Multi-Host, you must use the Docker MACVLAN driver, and your network must be reachable on all the nodes for Oracle RAC containers.
 
 ## Using this Image
 
-To create an Oracle RAC environment, execute the steps in the following sections:
+To create an Oracle RAC environment, run the steps in the following sections:
 
 - [Running an Oracle Real Application Clusters Database using Docker Engine](#running-an-oracle-real-application-clusters-database-using-docker-engine)
   - [Using this Image](#using-this-image)

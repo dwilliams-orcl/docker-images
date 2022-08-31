@@ -116,21 +116,22 @@ To run Oracle RAC using Oracle Container Runtime for Docker on multiple hosts, r
 
 To assist in building the images, you can use the [`buildContainerImage.sh`](https://github.com/oracle/docker-images/blob/master/OracleDatabase/RAC/OracleRealApplicationClusters/dockerfiles/buildContainerImage.sh) script. See the following for instructions and usage.
 
-- Before starting the next step, you must edit `docker-images/OracleDatabase/RAC/OracleRealApplicationClusters/dockerfiles/21.3.0/Dockerfile`, change `oraclelinux:7-slim` to `oraclelinux:8`, and save the file.
+### Oracle RAC Container Image for Docker
+If you are planing to deploy Oracle RAC container image on Podman, skip to the section `Oracle RAC Container Image for Podman`.
 
   ```bash
   ./buildContainerImage.sh -v <Software Version>
   #  for example ./buildContainerImage.sh -v 21.3.0
   ```
 
-- For detailed usage of the command, execute the following command:
+### Oracle RAC Container Image for Podman
+If you are planing to deploy Oracle RAC container image on Docker, skip to the section `Oracle RAC Container Image for Docker`.
 
-  ```bash
-  #  ./buildContainerImage.sh -h
-  ```
-
-- If you are planing to deploy RAC container on Podman then execute following step, otherwise skip to the next section.
-  - After the `21.3.0` Oracle RAC container image is built, start building a patched image with the download 21.7 RU and one-offs. To build the patch image, refer [Example of how to create a patched database image](https://github.com/oracle/docker-images/tree/main/OracleDatabase/RAC/OracleRealApplicationClusters/samples/applypatch).
+ ```
+ ./buildContainerImage.sh -v <Software Version> -o '--build-arg  BASE_OL_IMAGE=oraclelinux:8' -i
+ #  for example ./buildContainerImage.sh -v 21.3.0
+ ```
+- After the `21.3.0` Oracle RAC container image is built, start building a patched image with the download 21.7 RU and one-offs. To build the patch image, refer [Example of how to create a patched database image](https://github.com/oracle/docker-images/tree/main/OracleDatabase/RAC/OracleRealApplicationClusters/samples/applypatch).
 
 **Notes**
 

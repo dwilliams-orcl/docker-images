@@ -16,22 +16,34 @@
 # Run: 
 #      $ docker build -f Dockerfile -t oracle/rac-database:21.3.0-<patch level> . 
 #
+ARG BASE_RAC_IMAGE=oracle/database-rac:21.3.0
+
 # Pull base image
 # ---------------
-FROM oracle/database-rac:21.3.0
+FROM $BASE_RAC_IMAGE
 
+# Labels
+# ------
+LABEL "provider"="Oracle"                                            \
+      "issues"="https://github.com/oracle/docker-images/issues"      \
+      "maintainer"="paramdeep Saini <paramdeep.saini@oracle.com>"    \
+      "volume.setup.location1"="/opt/scripts"                        \
+      "volume.startup.location1"="/opt/scripts/startup"              \
+      "port.listener"="1521"                                         \
+      "port.oemexpress"="5500"
+
+# Argument to control removal of components not needed after db software installation
+ARG SLIMMING=false
+ARG PATCH_DIR="patches"
+ARG DB_EDITION="EE"
+ARG USER="root"
+ARG WORKDIR="/rac-work-dir"
 
 # Environment variables required for this build (do NOT change)
 # -------------------------------------------------------------
 USER root
 
-# Labels
-# ------
-LABEL "provider"="Oracle"                                               \
-      "issues"="https://github.com/oracle/docker-images/issues"         \
-      "maintainer"="paramdeep Saini <paramdeep.saini@oracle.com>"                               
-
-ENV PATCH_DIR="patches" \
+ENV PATCH_DIR=$PATCH_DIR \
     GRID_PATCH_FILE="applyGridPatches.sh" \
     DB_PATCH_FILE="applyDBPatches.sh" \
     FIXUP_PREQ_FILE="fixupPreq.sh" \
@@ -40,7 +52,6 @@ ENV PATCH_DIR="patches" \
 
 # Use second ENV so that variable get substituted
 ENV PATCH_INSTALL_DIR=/tmp/patches
-
 
 # Copy binaries
 # -------------
@@ -61,10 +72,11 @@ RUN chown -R grid:oinstall $PATCH_INSTALL_DIR/*.sh && \
     rm -rf /etc/oracle && \
     rm -rf $PATCH_INSTALL_DIR
 
-USER grid 
-WORKDIR /home/grid
+USER $USER
+WORKDIR $WORKDIR
+
 VOLUME ["/common_scripts"]
 
 # Define default command to start Oracle Grid and RAC Database setup.
 
-CMD ["/usr/sbin/oracleinit"]
+ENTRYPOINT /usr/bin/$INITSH

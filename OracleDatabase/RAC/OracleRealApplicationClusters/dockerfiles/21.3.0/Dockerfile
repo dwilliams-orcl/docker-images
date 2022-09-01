@@ -19,7 +19,7 @@
 # Run: 
 #      $ docker build -t oracle/database:21.3.0-rac . 
 
-ARG BASE_OL_IMAGE=oraclelinux:7
+ARG BASE_OL_IMAGE=oraclelinux:7-slim
 
 # Pull base image
 # ---------------
@@ -196,4 +196,3 @@ WORKDIR $WORKDIR
 # Define default command to start Oracle Grid and RAC Database setup.
 
 ENTRYPOINT /usr/bin/$INITSH
-~

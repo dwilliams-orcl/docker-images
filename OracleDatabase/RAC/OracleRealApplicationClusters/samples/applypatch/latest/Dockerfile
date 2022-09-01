@@ -48,6 +48,8 @@ ENV PATCH_DIR=$PATCH_DIR \
     DB_PATCH_FILE="applyDBPatches.sh" \
     FIXUP_PREQ_FILE="fixupPreq.sh" \
     DB_USER="oracle" \
+    USER=$USER \
+    WORKDIR=$WORKDIR \
     GRID_USER="grid"  
 
 # Use second ENV so that variable get substituted
